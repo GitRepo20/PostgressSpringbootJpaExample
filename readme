@@ -1,0 +1,65 @@
+CREATE TABLE user_account(
+	id serial PRIMARY KEY,first_name VARCHAR (50) NOT NULL,last_name VARCHAR (50) NOT NULL,username VARCHAR (50) UNIQUE NOT NULL,
+	password VARCHAR (50) NOT NULL,email VARCHAR (355) UNIQUE NOT NULL,created_on TIMESTAMP NOT NULL,last_login TIMESTAMP,
+	subscription_id INTEGER NOT NULL,FOREIGN KEY (subscription_id) REFERENCES subscription (id)
+);
+
+--------------
+CREATE TABLE user_account(
+	id serial PRIMARY KEY,first_name VARCHAR (50) NOT NULL,last_name VARCHAR (50) NOT NULL,username VARCHAR (50) UNIQUE NOT NULL,
+	password VARCHAR (50) NOT NULL,email VARCHAR (355) UNIQUE NOT NULL,created_on TIMESTAMP NOT NULL,last_login TIMESTAMP
+);
+--subscription_id INTEGER NOT NULL,FOREIGN KEY (subscription_id) REFERENCES subscription (id)
+
+
+create table movies(id serial PRIMARY KEY,
+movie_name varchar(50) NOT NULL,release_year TIMESTAMP NOT NULL);
+
+create table subscription_plan(id serial PRIMARY KEY,
+code_name varchar(50) UNIQUE NOT NULL,pricing INTEGER NOT NULL);
+
+create table profile_to_movies(profile_id INTEGER,movies_id INTEGER,
+FOREIGN KEY (profile_id) REFERENCES profile (id),
+FOREIGN KEY (movies_id) REFERENCES movies (id));
+
+commit;
+DROP TABLE movies_profile;
+DROP TABLE subscription;
+DROP TABLE user_account;
+
+delete from subscription;
+delete from profile;
+delete from movies;
+delete from user_account;
+commit;
+rollback;
+
+select * from user_account;
+select * from  subscription;
+select * from profile;
+select * from movies;
+select * from movies_profile;
+
+select * from post_tags;
+select * from posts;
+select * from tags;
+
+
+commit;
+
+create table item_profile(id serial PRIMARY KEY,
+profile_name varchar(50) NOT NULL,user_id INTEGER NOT NULL);
+
+DROP TABLE subscription_plan;
+				  
+
+insert into user_account(username,password,email,created_on,last_login)
+values('santoshjogade','pwd123','santoshjogade@xyz.com',NOW(),NOW());
+
+drop table subscription;
+select * from subscription;
+select * from subscription_plan;
+commit;
+
+INSERT INTO subscription_plan(code_name,pricing) values ('Premium',1500);
+INSERT INTO subscription_plan(code_name,pricing) values ('VIP',1000);
